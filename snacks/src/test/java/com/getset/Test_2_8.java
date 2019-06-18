@@ -4,15 +4,11 @@ import org.junit.Test;
 import reactor.core.Disposable;
 import reactor.core.publisher.ConnectableFlux;
 import reactor.core.publisher.Flux;
-import reactor.core.publisher.SignalType;
 import reactor.core.publisher.UnicastProcessor;
-import reactor.test.publisher.TestPublisher;
 
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicLong;
-import java.util.concurrent.atomic.AtomicReference;
 
 
 public class Test_2_8 {
@@ -74,7 +70,7 @@ public class Test_2_8 {
 
         autoCo.subscribe(System.out::println, e -> {}, () -> {});
         System.out.println("第一个订阅者完成订阅操作");
-        Thread.sleep(500);
+        Thread.sleep(5000);
         System.out.println("第二个订阅者完成订阅操作");
         autoCo.subscribe(System.out::println, e -> {}, () -> {});
     }

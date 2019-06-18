@@ -178,6 +178,8 @@ public class Test_1_3 {
         Mono.fromCallable(() -> getStringSync())
                 .subscribeOn(Schedulers.elastic())
                 .subscribe(System.out::println, null, countDownLatch::countDown);
+        System.out.println(123);
+
         countDownLatch.await(10, TimeUnit.SECONDS);
     }
 
