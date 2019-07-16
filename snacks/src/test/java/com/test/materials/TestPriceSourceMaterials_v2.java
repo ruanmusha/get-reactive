@@ -34,7 +34,7 @@ public class TestPriceSourceMaterials_v2 {
 	}
 
 	//依赖批次信息
-	public Mono<Boolean> fillDependOnBatch(PriceSourceMaterials priceSourceMaterials, ProvinceArea provinceArea,
+	private Mono<Boolean> fillDependOnBatch(PriceSourceMaterials priceSourceMaterials, ProvinceArea provinceArea,
 	                                    MixItemPriceFactoryContract mixItemPriceFactoryContract) {
 		System.out.println("get depend on batch:" + priceSourceMaterials.getBatch());
 
@@ -44,8 +44,6 @@ public class TestPriceSourceMaterials_v2 {
 		Mono<Boolean> biddingPriceMono = wrapper.fillSourceMaterialsBiddingPrice(priceSourceMaterials, provinceArea);
 		Mono<Boolean> activityMono = wrapper.fillSourceMaterialsPreferenceFromUmp(priceSourceMaterials,
 		                                                                          mixItemPriceFactoryContract);
-		Mono.zip(logisticCarryMono, packFeeMono, biddingPriceMono, activityMono).block();
-
-		return Mono.empty();
+		return Mono.zip(logisticCarryMono, packFeeMono, biddingPriceMono, activityMono).then(Mono.just(true));
 	}
 }
